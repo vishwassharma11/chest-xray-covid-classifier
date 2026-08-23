@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>COVID Image Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel">
+        <p class="eyebrow">Research-only image classifier</p>
+        <h1>COVID CT/X-ray Prediction</h1>
+        <p class="note">
+          Upload a PNG or JPG scan image. This demo uses your trained TensorFlow model and is not for medical diagnosis.
+        </p>
+
+        <form method="post" enctype="multipart/form-data" class="upload-form">
+          <label class="dropzone">
+            <span>Choose scan image</span>
+            <input type="file" name="image" accept=".png,.jpg,.jpeg,image/png,image/jpeg" required>
+          </label>
+          <button type="submit">Predict</button>
+        </form>
+
+        {% if error %}
+          <div class="alert">{{ error }}</div>
+        {% endif %}
+
+        {% if result %}
+          <section class="result">
+            <div>
+              <p class="result-label">Prediction</p>
+              <h2 class="{{ 'covid' if result.label == 'COVID' else 'clear' }}">{{ result.label }}</h2>
+              <p class="confidence">{{ "%.1f"|format(result.confidence * 100) }}% confidence</p>
+            </div>
+            <div class="scores">
+              {% for label, score in result.scores.items() %}
+                <div>
+                  <span>{{ label }}</span>
+                  <strong>{{ "%.1f"|format(score * 100) }}%</strong>
+                  <meter min="0" max="1" value="{{ score }}"></meter>
+                </div>
+              {% endfor %}
+            </div>
+          </section>
+          <img class="preview" src="data:image/png;base64,{{ result.preview }}" alt="Uploaded scan preview">
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>

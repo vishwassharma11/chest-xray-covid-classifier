@@ -5,6 +5,8 @@ This project trains a binary image classifier on the included chest X-ray datase
 - `archive-3/COVID/` — COVID images
 - `archive-3/non-COVID/` — non-COVID images
 
+Dataset source: [SARS-CoV-2 CT-scan Dataset on Kaggle](https://www.kaggle.com/datasets/plameneduardo/sarscov2-ctscan-dataset). Please consult the source page for its license, attribution requirements, and terms before redistributing or using the data.
+
 > **Important:** This is an educational/research project only. It is not a medical device and must not be used to diagnose, rule out, or make treatment decisions for COVID-19. Model performance on this dataset does not establish clinical safety or generalization.
 
 ## Quick start
@@ -21,6 +23,28 @@ Train a baseline model:
 
 ```bash
 python train.py --data-dir archive-3 --epochs 10
+```
+
+Run the local web app after training:
+
+```bash
+python app.py
+```
+
+Then open `http://127.0.0.1:5000` and upload a PNG or JPG image.
+
+## Deploy online
+
+This repo includes the trained model in `artifacts/best_model.keras`, so it can be deployed as a small Flask web app. On Render, create a new Web Service from this GitHub repo and use:
+
+```bash
+pip install -r requirements.txt
+```
+
+Start command:
+
+```bash
+gunicorn app:app
 ```
 
 Results are written to `artifacts/`:
@@ -40,7 +64,10 @@ For any serious research, audit image provenance, patient-level leakage, demogra
 
 ```
 archive-3/       Dataset supplied with this project
+app.py           Local upload-and-predict web app
 train.py         Reproducible training and evaluation entry point
 requirements.txt Python dependencies
 artifacts/       Generated after training (ignored by Git)
+templates/       Web page template for the app
+static/          Web app styling
 ```

@@ -1,7 +1,9 @@
 .venv/
 __pycache__/
 .ipynb_checkpoints/
-artifacts/
+artifacts/*
+!artifacts/best_model.keras
+!artifacts/class_names.json
 archive-3/
 anaconda_projects/
 *.pyc
