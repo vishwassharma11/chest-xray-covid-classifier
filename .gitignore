@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+artifacts/
+archive-3/
+anaconda_projects/
+*.pyc
+.DS_Store
