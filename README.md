@@ -7,7 +7,7 @@ This project trains a binary image classifier on the included chest X-ray datase
 
 Dataset source: [SARS-CoV-2 CT-scan Dataset on Kaggle](https://www.kaggle.com/datasets/plameneduardo/sarscov2-ctscan-dataset). Please consult the source page for its license, attribution requirements, and terms before redistributing or using the data.
 
-> **Important:** This is an educational/research project only. It is not a medical device and must not be used to diagnose, rule out, or make treatment decisions for COVID-19. Model performance on this dataset does not establish clinical safety or generalization.
+> **Important:** This is an educational/research project only.
 
 ## Quick start
 
